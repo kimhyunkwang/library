@@ -1,23 +1,45 @@
 import pymysql
 from flask import Flask, request, session, render_template, url_for, redirect
 from flask_restful import reqparse, abort, Api, Resource
+from flask_migrate import Migrate
+import config
+from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import check_password_hash
 from werkzeug.security import generate_password_hash
+# from models import db
+# from models import User
 
 app = Flask(__name__)
-api = Api(app)
 
-db = pymysql.connect(
-    user='root',
-    host='localhost',
-    port=3306,
-    db='library',
-    charset='utf8',
-)
+app.config['SQLALCHEMY_DATABASE_URI'] = ("mysql+pymysql://root:@localhost:3306/library?charset=utf8")
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.secret_key = 'dev'
+# app.config.from_pyfile('config.py')
 
-cursor = db.cursor()
+db = SQLAlchemy(app)
 
-app.config.from_mapping(SECRET_KEY='dev')
+migrate = Migrate()
+
+db.init_app(app)
+migrate.init_app(app, db)
+
+
+class User(db.Model):
+    # __tablename__ = 'user_table'
+
+    id = db.Column(db.Integer, primary_key=True)
+    fullname = db.Column(db.String(32), nullable=False)
+    email = db.Column(db.String(64), nullable=False)
+    password = db.Column(db.String(128), nullable=False)
+    
+    def __init__(self, fullname, email, password):
+        self.fullname = fullname
+        self.email = email
+        self.set_password(password)
+    
+    def set_password(self, password):
+        self.password = generate_password_hash(password)
+
 
 @app.route("/")
 def home():
@@ -36,29 +58,20 @@ def register():
         repeat_password = request.form['repeat-password']
         
         error = None
-        
-        if not fullname:
-            error = 'Fullname이 유효하지 않습니다.'
-        if not email:
-            error = 'Email이 유효하지 않습니다.'
-        elif not password:
-            error = 'Password가 유효하지 않습니다.'
-        elif not repeat_password:
-            error = 'Repeat Password가 유효하지 않습니다.'
 
-        sql = 'SELECT id FROM user WHERE email = %s'
-        cursor.execute(sql, (email,))
-        result = cursor.fetchone()
-        if result is not None:
-            error = '{} 은 이미 등록된 계정입니다.'.format(email)
-
-        if password != repeat_password:
-            error = 'Password와 Repeat Password가 다릅니다.'
+        if not(fullname and email and password and repeat_password):
+            error = "입력되지 않은 정보가 있습니다."
+        elif password != repeat_password:
+            error = '비밀번호가 일치하지 않습니다.'
+        else:
+            data = User.query.filter(User.email == email).first()
+            if data is not None:
+                error = f'{email} 은 이미 등록된 계정입니다.'
 
         if error is None:
-            sql = "INSERT INTO `user` (`email`, `fullname`, `password`) VALUES (%s, %s, %s)"
-            cursor.execute(sql, (email, fullname, generate_password_hash(password)))
-            db.commit()
+            new_user = User(fullname, email, password)
+            db.session.add(new_user)
+            db.session.commit()
             return redirect(url_for('login'))
         else:
             return render_template('register.html', error=error)
@@ -74,18 +87,15 @@ def login():
         
         error = None
         
-        sql = 'SELECT email, password FROM user WHERE email = %s'
-        cursor.execute(sql, (email,))
-        user = cursor.fetchone()
+        data = User.query.filter(User.email == email).first()
         
-        if user is None:
+        if data is None:
             error = '등록되지 않은 계정입니다.'
         
-        if not (user == None or check_password_hash(user[1], password)):
+        if not (data == None or check_password_hash(data.password, password)):
             error = '비밀번호가 틀렸습니다.'
 
         if error is None:
-            session.clear()
             session['logged_in'] = True
             return redirect(url_for('home'))
         else:
@@ -100,6 +110,13 @@ def logout():
     return render_template('index.html')
 
 
+@app.route('/all')
+def select_all():
+    users = User.query.all()
+    return render_template('db.html', users = users)
+
+
 if __name__ == '__main__':
     app.debug = True
-    app.run('localhost', port=80)
+    db.create_all()
+    app.run('localhost', port=5000)
