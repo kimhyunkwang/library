@@ -9,7 +9,7 @@ api = Api(app)
 
 db = pymysql.connect(
     user='root',
-    host='127.0.0.1',
+    host='localhost',
     port=3306,
     db='library',
     charset='utf8',
