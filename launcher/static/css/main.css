@@ -1,0 +1,53 @@
+/* Default */
+/* * {
+    margin: 0;
+    padding: 0;
+} */
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+/* Header */
+header h1 {
+    font-size: 36px;
+}
+header button {
+    width: 100px;
+    height: 35px;
+
+    font-size: 17px;
+    font-weight: bold;
+
+    border: 0;
+    border-radius: 10px;
+    background-color: rgb(156, 224, 196);
+}
+
+/* 책 목록 */
+.container {
+    display: grid;
+    grid-template-columns:repeat(auto-fill, minmax(25%, auto));
+    grid-auto-rows: minmax(200px, auto);
+    row-gap: 40px;
+
+    margin: 20px auto;
+    margin-bottom: 40px;
+
+    text-align: center;
+}
+.container .item p{
+    font-size: 15px;
+    font-weight: bold;
+}
+.container .item #rental {
+    width: 200px;
+    height: 35px;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    border: 0;
+    border-radius: 10px;
+    background-color: rgb(216, 216, 216);
+}

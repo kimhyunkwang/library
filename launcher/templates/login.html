@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>도서관 대출 서비스</title>
+
+    <link rel="stylesheet" href="../static/css/login.css">
 </head>
 <body>
     <form action = "" method="post">
         <h1>로그인</h1>
         <input type="text" placeholder="Email" id="email" name="email" required><br>
-        <input type="password" placeholder="Password" id="password" name="password" required><br>
-        <input type = "submit" value = "Sign In" />
+        <input type="password" placeholder="Password" id="password" name="password" required><br><br>
+        <input type = "submit" id="sign-in" value = "Sign In" />
         <p>{{error}}</p>
     </form>
 </body>

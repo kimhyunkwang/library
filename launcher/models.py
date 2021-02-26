@@ -1,8 +1,6 @@
 from launcher import db
 
 class User(db.Model):
-    # __tablename__ = 'user_table'
-
     id = db.Column(db.Integer, primary_key=True)
     fullname = db.Column(db.String(32), nullable=False)
     email = db.Column(db.String(64), nullable=False)
@@ -39,3 +37,13 @@ class Book(db.Model):
         self.stock = stock
         self.rating = rating
         self.image_path = image_path
+
+class BookRental(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    # Book이 사라져도 대여기록이 남아 있어야 될 거 같은데 CASCADE 맞나? backref는 필요 없지..?
+    book_id = db.Column(db.Integer, db.ForeignKey('book.id', ondelete='CASCADE'))
+    book = db.relationship('Book')
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'))
+    user = db.relationship('User', backref=db.backref('book_rental_set'))
+    rental_date = db.Column(db.Date(), nullable=False)
+    return_date = db.Column(db.Date(), nullable=True)
