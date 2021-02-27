@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>도서관 대출 서비스</title>
+
+    <link rel="stylesheet" href="../static/css/main.css">
+    <link rel="stylesheet" href="../static/css/book_info.css">
+</head>
+<body>
+    <header>
+
+    </header>
+    <table>
+        <tr>
+            <td>
+                <div style="text-align : center;">
+                    <img src="{{ book.image_path }}" alt="{{ book.book_name }}" height=300px/>
+                </div>
+            </td>
+            <td>
+                <ul>
+                    <li>책 이름 : {{ book.book_name }}</li>
+                    <li>출판사 : {{ book.publisher }}</li>
+                    <li>저자 : {{ book.author }}</li>
+                    <li>출간일 : {{ book.publication_date }}</li>
+                    <li>페이지수 : {{ book.pages }}</li>
+                    <li>ISBN 코드 : {{ book.isbn }}</li>
+                </ul>
+
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2"> 
+                <br><h2>책 소개</h2>
+                <p>{{ book.description }}</p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <h2>댓글</h2>
+                <!-- 댓글 있다면 보여주는 공간 : 이름과 댓글, 별점 -->
+                <form>
+                    <textarea rows="3" cols="130"></textarea><br><br>
+                    <!-- 별점 추가하기 -->
+                    <input type = "submit" id="comment" value = "작성하기" />
+                </form>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
