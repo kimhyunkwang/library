@@ -40,7 +40,8 @@ header button {
     font-size: 15px;
     font-weight: bold;
 }
-.container .item #rental {
+.container .item #rental,
+.container .item #return {
     width: 200px;
     height: 35px;
 

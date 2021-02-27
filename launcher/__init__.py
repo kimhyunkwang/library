@@ -122,14 +122,36 @@ def create_app():
             books = Book.query.all()
             return render_template('main.html', books=books)
 
+
     @app.route('/rental')
     def rental():
         book_rentals = BookRental.query.filter(BookRental.user_id == session['user_id']).all()
         return render_template('rental.html', book_rentals=book_rentals)
 
-    @app.route('/return')
+
+    @app.route('/return', methods=('GET', 'POST'))
     def return_book():
-        return render_template('return.html')
+        if request.method == 'POST':
+            book_id = request.form["book-id"]
+            user_id = session['user_id']
+
+            book = Book.query.filter(Book.id == book_id).first()
+            book.stock += 1
+
+            now = datetime.datetime.now()
+            nowDate = now.strftime('%Y-%m-%d')
+            book_rental = BookRental.query.filter(BookRental.book_id == book_id, BookRental.user_id == user_id ).first()
+            book_rental.return_date = nowDate
+                
+            db.session.commit()
+                
+            flash(book.book_name + "을(를) 반납했습니다.")
+
+            return redirect(url_for('return_book'))
+
+        else:
+            book_rentals = BookRental.query.filter(BookRental.user_id == session['user_id']).all()
+            return render_template('return.html', book_rentals=book_rentals)
 
 
     return app
