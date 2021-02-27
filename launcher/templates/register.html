@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>도서관 대출 서비스</title>
+
+    <link rel="stylesheet" href="../static/css/register.css">
 </head>
 <body>
     <form action = "" method="post">
@@ -10,13 +12,13 @@
         <input type="text" placeholder="Name" id="fullname" name="fullname" required><br>
         <input type="text" placeholder="Email" id="email" name="email" required><br>
         <input type="password" placeholder="Password" id="password" name="password" required><br>
-        <input type="password" placeholder="Repeat Password" id="repeat-password" name="repeat-password" required><br>
-        <p>
+        <input type="password" placeholder="Repeat Password" id="repeat-password" name="repeat-password" required><br><br>
+        <!-- <p>
             패스워드에는 특수문자, 영문, 숫자가 각 1개 이상 포함되어야 합니다.<br/>
             패스워드 길이는 8자 이상이어야 합니다.
-        </p>
+        </p> -->
         
-        <input type = "submit" value = "Sign In" />
+        <input type = "submit" id="sign-up" value = "Sign Up" />
         <p>{{error}}</p>
     </form>
 </body>

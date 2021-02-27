@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>도서관 대출 서비스</title>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <script>
+        alert("{{ messages[-1] }}");
+    </script>
+    {% endif %}
+    {% endwith %}
+
+    <link rel="stylesheet" href="../static/css/main.css">
+</head>
+<body>
+    <header>
+        <h1><a href="/main">Welcome to the Library!</a></h1>
+        <button class="rental-list"><a href= "rental">대여기록</a></button>
+        <button class="return"><a href= "return">반납하기</a></button>
+        <button class="sign-out"><a href= "logout">Sign Out</a></button>
+    </header>
+    
+    <div class="container">
+        {% for book_rental in book_rentals %}
+            {% if not book_rental.return_date %}
+            <div class="item">
+                <p><img src="{{ book_rental.book.image_path }}" alt="{{ book_rental.book.book_name }}" height=200/></p>
+                <p><a href= "/books/{{ book_rental.book_id }}" >{{ book_rental.book.book_name }}</a></p>
+                <p>{{ book_rental.book.rating }}</p>
+                <p>{{ book_rental.rental_date }}</p>
+
+                <form action = "" method="post">
+                    <input type="hidden" name="book-id" value="{{ book_rental.book_id }}"/>
+                    <input type="submit" id="return" value="반납하기" />
+                </form>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</body>
+</html>
+
