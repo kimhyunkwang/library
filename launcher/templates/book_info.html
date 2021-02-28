@@ -9,7 +9,12 @@
 </head>
 <body>
     <header>
-
+        <h1><a href="../main">Welcome to the Library!</a></h1>
+        <div class="header-button">
+            <button class="rental-list"><a href= "../rental">대여기록</a></button>
+            <button class="return"><a href= "../return">반납하기</a></button>
+            <button class="sign-out"><a href= "../logout">Sign Out</a></button>
+        </div>
     </header>
     <table>
         <tr>
@@ -27,7 +32,6 @@
                     <li>페이지수 : {{ book.pages }}</li>
                     <li>ISBN 코드 : {{ book.isbn }}</li>
                 </ul>
-
             </td>
         </tr>
         <tr>
@@ -38,12 +42,20 @@
         </tr>
         <tr>
             <td colspan="2">
-                <h2>댓글</h2>
-                <!-- 댓글 있다면 보여주는 공간 : 이름과 댓글, 별점 -->
-                <form>
-                    <textarea rows="3" cols="130"></textarea><br><br>
-                    <!-- 별점 추가하기 -->
-                    <input type = "submit" id="comment" value = "작성하기" />
+                <h2>댓글 ({{comments | length}})</h2>
+                {% for comment in comments %}
+                    {% if comment %}
+                    <div class="comment">
+                        {{ comment.user.fullname }}<br>
+                        {{ comment.content }}
+                        <!-- {{ 별점 }} -->
+                    </div> 
+                    {% endif %}
+                {% endfor %}
+                <form action = "" method="post">
+                    <p><textarea rows="3" cols="150" name="content"></textarea></p>
+                    <!-- 별점 입력 추가하기 -->
+                    <input type = "submit" id="submit" value = "작성하기" />
                 </form>
             </td>
         </tr>

@@ -3,7 +3,7 @@ table {
     padding: 40px;
     margin: 0 auto;
 }
-table #comment {
+table #submit {
     width: 200px;
     height: 35px;
 
@@ -13,4 +13,8 @@ table #comment {
     border: 0;
     border-radius: 10px;
     background-color: rgb(216, 216, 216);
+}
+table .comment {
+    width : 960px;
+    height: 51px;
 }

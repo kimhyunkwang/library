@@ -40,10 +40,19 @@ class Book(db.Model):
 
 class BookRental(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    # Book이 사라져도 대여기록이 남아 있어야 될 거 같은데 CASCADE 맞나? backref는 필요 없지..?
-    book_id = db.Column(db.Integer, db.ForeignKey('book.id', ondelete='CASCADE'))
+    book_id = db.Column(db.Integer, db.ForeignKey('book.id'), nullable=False)
     book = db.relationship('Book')
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'), nullable=False)
     user = db.relationship('User', backref=db.backref('book_rental_set'))
     rental_date = db.Column(db.Date(), nullable=False)
     return_date = db.Column(db.Date(), nullable=True)
+
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    book_id = db.Column(db.Integer, db.ForeignKey('book.id', ondelete='CASCADE'), nullable=False)
+    book = db.relationship('Book', backref=db.backref('comment_set'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'), nullable=False)
+    user = db.relationship('User')
+    content = db.Column(db.Text(), nullable=False)
+    create_date = db.Column(db.DateTime(), nullable=False)
+    

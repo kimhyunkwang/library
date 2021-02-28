@@ -20,7 +20,7 @@ def create_app():
     db.init_app(app)
     migrate.init_app(app, db)
 
-    from launcher.models import User, Book, BookRental
+    from launcher.models import User, Book, BookRental, Comment
 
     @app.route("/")
     def home():
@@ -106,10 +106,11 @@ def create_app():
 
                 book_rental = BookRental.query.filter(BookRental.book_id == book_id, BookRental.user_id == user_id).first()
                 # 대여해서 반납하지 않은 경우
-                if book_rental and book_rental.return_date == None:
-                    flash("고객님께서 대여 중인 책입니다.")
-                    books = Book.query.all()
-                    return render_template('main.html', books=books)
+                if book_rental:
+                    if book_rental.return_date:
+                        flash("고객님께서 대여 중인 책입니다.")
+                        books = Book.query.all()
+                            return render_template('main.html', books=books)
 
                 # 대여한 적이 없는 경우와 대여한 적 있지만 반납 완료한 경우
                 now = datetime.datetime.now()
@@ -121,7 +122,6 @@ def create_app():
                 db.session.commit()
                     
                 flash(book.book_name + "을(를) 대여했습니다.")
-
                 return redirect(url_for('main'))
 
             # 재고가 없는 경우
@@ -158,7 +158,6 @@ def create_app():
             db.session.commit()
                 
             flash(book.book_name + "을(를) 반납했습니다.")
-
             return redirect(url_for('return_book'))
 
         else:
@@ -168,13 +167,21 @@ def create_app():
 
     @app.route('/books/<int:book_id>', methods=('GET', 'POST'))
     def book_info(book_id):
-        # if request.method == 'POST':
-        # else:
+        if request.method == 'POST':
+            content = request.form["content"]
+            user_id = session['user_id']
+            create_date = datetime.datetime.now()
+
+            new_comment = Comment(book_id = book_id, user_id = user_id, content = content, create_date = create_date)
+            db.session.add(new_comment)
+            db.session.commit()
+            return redirect(url_for('book_info', book_id = book_id))
+
+        else:
             book = Book.query.get(book_id)
-            return render_template('book_info.html', book = book)
+            comments = Comment.query.filter(Comment.book_id == book_id).all()
+            return render_template('book_info.html', book = book, comments = comments)
         
-
-
 
     return app
 
