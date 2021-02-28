@@ -55,4 +55,4 @@ class Comment(db.Model):
     user = db.relationship('User')
     content = db.Column(db.Text(), nullable=False)
     create_date = db.Column(db.DateTime(), nullable=False)
-    
+    rating = db.Column(db.Integer, nullable=False)

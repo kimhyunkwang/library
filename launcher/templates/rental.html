@@ -21,7 +21,7 @@
             <div class="item">
                 <p><img src="{{ book_rental.book.image_path }}" alt="{{ book_rental.book.book_name }}" height=200/></p>
                 <p><a href= "/books/{{ book_rental.book_id }}" >{{ book_rental.book.book_name }}</a></p>
-                <p>{{ book_rental.book.rating }}</p>
+                <p><img src="/static/image/star3.png" alt="star" height=15px id="star"/> {{ book_rental.book.rating }}</p>
                 <p>
                     {{ book_rental.rental_date }} ~ 
 
@@ -34,4 +34,3 @@
     </div>
 </body>
 </html>
-

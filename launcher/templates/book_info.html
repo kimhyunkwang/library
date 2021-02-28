@@ -43,18 +43,18 @@
         <tr>
             <td colspan="2">
                 <h2>댓글 ({{comments | length}})</h2>
-                {% for comment in comments %}
+                {% for comment in comments | reverse %}
                     {% if comment %}
                     <div class="comment">
-                        {{ comment.user.fullname }}<br>
-                        {{ comment.content }}
-                        <!-- {{ 별점 }} -->
+                        <p class="name">{{ comment.user.fullname }}</p>
+                        <p><img src="/static/image/star3.png" alt="star" height=15px id="star"/> {{ comment.rating }} {{ comment.content }}</p>
                     </div> 
                     {% endif %}
                 {% endfor %}
                 <form action = "" method="post">
-                    <p><textarea rows="3" cols="150" name="content"></textarea></p>
-                    <!-- 별점 입력 추가하기 -->
+                    <p><textarea rows="3" cols="150" name="content" required></textarea></p>
+                    <input type="number" id="rating" name="rating" min="1" max="5" required>
+                    <img src="/static/image/star3.png" alt="star" height=15px id="star"/><br><br>
                     <input type = "submit" id="submit" value = "작성하기" />
                 </form>
             </td>

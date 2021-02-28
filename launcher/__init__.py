@@ -167,12 +167,22 @@ def create_app():
     @app.route('/books/<int:book_id>', methods=('GET', 'POST'))
     def book_info(book_id):
         if request.method == 'POST':
-            content = request.form["content"]
+            content = request.form['content']
+            rating = request.form['rating']
             user_id = session['user_id']
             create_date = datetime.datetime.now()
 
-            new_comment = Comment(book_id = book_id, user_id = user_id, content = content, create_date = create_date)
+            new_comment = Comment(book_id = book_id, user_id = user_id, content = content, rating = rating, create_date = create_date)
             db.session.add(new_comment)
+            db.session.commit()
+
+            ratings = db.session.query(Comment.rating).filter(Comment.book_id == book_id).all()
+            total = 0
+            for rating in ratings:
+                total += rating[0]
+            rating_avg = round( total / len(ratings) )
+            book = Book.query.get(book_id)
+            book.rating = rating_avg
             db.session.commit()
             return redirect(url_for('book_info', book_id = book_id))
 

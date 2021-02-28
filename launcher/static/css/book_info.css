@@ -3,6 +3,9 @@ table {
     padding: 40px;
     margin: 0 auto;
 }
+table ul {
+    list-style: square;
+}
 table #submit {
     width: 200px;
     height: 35px;
@@ -14,7 +17,9 @@ table #submit {
     border-radius: 10px;
     background-color: rgb(216, 216, 216);
 }
-table .comment {
-    width : 960px;
-    height: 51px;
+table .comment .name {
+    font-weight: bold;
+}
+textarea {
+    width: 100%;
 }
