@@ -19,7 +19,9 @@
         </p> -->
         
         <input type = "submit" id="sign-up" value = "Sign Up" />
-        <p>{{error}}</p>
+        {% if error %}
+        <p>&#10060; {{error}}</p>
+        {% endif %}
     </form>
 </body>
 </html>

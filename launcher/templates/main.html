@@ -29,12 +29,12 @@
             <div class="item">
                 <p><img src="{{ book.image_path }}" alt="{{ book.book_name }}" height=200/></p>
                 <p><a href= "/books/{{ book.id }}" >{{ book.book_name }}</a></p>
-                <p><img src="/static/image/star3.png" alt="star" height=15px id="star"/> {{ book.rating }}</p>
+                <p>&#11088; {{ book.rating }}</p>
                 <p>{{ book.stock }}권 남음</p>
 
                 <form action = "" method="post">
                     <input type="hidden" name="book-id" value="{{ book.id }}"/>
-                    <input type="submit" id="rental" value="대여하기" />
+                    <input type="submit" id="rental-bnt" value="대여하기" />
                 </form>
             </div>
         {% endfor %}

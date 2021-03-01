@@ -1,7 +1,8 @@
+/* Main */
 table {
     width: 1000px;
     padding: 40px;
-    margin: 0 auto;
+    margin: 0 auto 30px auto;
 }
 table ul {
     list-style: square;

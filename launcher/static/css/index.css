@@ -1,30 +1,27 @@
 /* Default */
-/* * {
-    margin: 0;
-    padding: 0;
-} */
-
 a {
     text-decoration: none;
     color: #000;
 }
+
 /* Header */
+header {
+    text-align: center;
+    margin-top: 180px;
+}
 header h1 {
     font-size: 36px;
 }
-
 header h3 {
-    font-size: 15px;
+    font-size: 17px;
 }
-
 header .sign-in,
 header .sign-up {
-    width: 100px;
+    width: 180px;
     height: 35px;
 
     font-size: 17px;
     font-weight: bold;
-    /* color: rgb(255, 255, 255); */
 
     border: 0;
     border-radius: 10px;
@@ -33,5 +30,5 @@ header .sign-in {
     background-color: rgb(156, 224, 196);
 }
 header .sign-up {
-    background-color: rgb(244, 255, 93);
+    background-color: rgb(237, 248, 87);
 }

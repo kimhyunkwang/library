@@ -4,16 +4,20 @@ a {
     color: #000;
 }
 
+/* Main */
+form {
+    text-align: center;
+    margin-top: 180px;
+}
 form h1 {
     font-size: 36px;
 }
 form #sign-in {
-    width: 100px;
+    width: 180px;
     height: 35px;
 
     font-size: 17px;
     font-weight: bold;
-    /* color: rgb(255, 255, 255); */
 
     border: 0;
     border-radius: 10px;
@@ -21,4 +25,5 @@ form #sign-in {
 }
 form p {
     font-size: 15px;
+    font-weight: bold;
 }

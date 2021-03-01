@@ -5,11 +5,18 @@ a {
 }
 
 /* Header */
+header {
+    margin: 30px 0;
+}
 header h1 {
     font-size: 36px;
+    text-align: center;
+}
+header .header-button {
+    text-align: center;
 }
 header .header-button button{
-    width: 100px;
+    width: 135px;
     height: 35px;
 
     font-size: 17px;
@@ -19,8 +26,14 @@ header .header-button button{
     border-radius: 10px;
     background-color: rgb(156, 224, 196);
 }
+header .header-button button a {
+    transition: color 0.3s;
+}
+header .header-button button a:hover {
+    color: rgb(148, 148, 148);
+}
 
-/* 책 목록 */
+/* Main */
 .container {
     display: grid;
     grid-template-columns:repeat(auto-fill, minmax(25%, auto));
@@ -36,8 +49,8 @@ header .header-button button{
     font-size: 15px;
     font-weight: bold;
 }
-.container .item #rental,
-.container .item #return {
+.container .item #rental-bnt,
+.container .item #return-bnt {
     width: 200px;
     height: 35px;
 

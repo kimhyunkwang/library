@@ -56,7 +56,7 @@ def create_app():
                 return redirect(url_for('login'))
             else:
                 return render_template('register.html', error=error)
-            
+        
         return render_template('register.html')
 
 
@@ -74,7 +74,7 @@ def create_app():
                 error = '등록되지 않은 계정입니다.'
             
             if not (data == None or check_password_hash(data.password, password)):
-                error = '비밀번호가 틀렸습니다.'
+                error = '비밀번호가 올바르지 않습니다.'
 
             if error is None:
                 session['logged_in'] = True
