@@ -13,7 +13,7 @@ migrate = Migrate()
 def create_app():
     app = Flask(__name__)
 
-    app.config['SQLALCHEMY_DATABASE_URI'] = ("mysql+pymysql://root:@localhost:3306/library?charset=utf8")
+    app.config['SQLALCHEMY_DATABASE_URI'] = ("mysql+pymysql://root:1234@localhost:3306/library?charset=utf8")
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.secret_key = 'dev'
 
@@ -130,8 +130,15 @@ def create_app():
                 return render_template('main.html', books=books)
 
         else:
-            books = Book.query.all()
-            return render_template('main.html', books=books)
+            page = request.args.get('page', type=int, default=1)
+
+            book_list = Book.query.order_by(Book.id)
+            book_list = book_list.paginate(page, per_page=8)
+
+            return render_template('main.html', book_list=book_list)
+
+            # books = Book.query.all()
+            # return render_template('main.html', books=books)
 
 
     @app.route('/rental')
@@ -195,6 +202,5 @@ def create_app():
     return app
 
 if __name__ == '__main__':
-    app.debug = True
     db.create_all()
-    app.run('localhost', port=5000)
+    app.run('localhost', port=5000, debug=True)
