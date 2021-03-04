@@ -11,15 +11,45 @@
         {{ form.csrf_token }}
         <h1>로그인</h1>
         
-        <div><input type="text" placeholder="Email" id="email" name="email" value="{{ form.email.data or '' }}"></div>
+        <div>
+            <input type="text" placeholder="Email" id="email" name="email" value="{{ form.email.data or '' }}">
+        </div>
+        <!-- 필드 에러(폼 검증에 실패한 경우) -->
         {% if form.email.errors %}
-        <div class="error">&#10060;{{ form.email.errors.0 }}</div>
+        <div class="error">
+            &#10060;
+            {{ form.email.errors.0 }}
+        </div>
         {% endif %}
+        <!-- flash 에러 -->
+        {% with errors = get_flashed_messages(category_filter=["email_error"]) %}
+        {% if errors %}
+        <div class="error">
+            &#10060;
+            {{ errors[-1] }}
+        </div>
+        {% endif %}
+        {% endwith %}
 
-        <div><input type="password" placeholder="Password" id="password" name="password" value="{{ form.password.data or '' }}"></div>
+        <div>
+            <input type="password" placeholder="Password" id="password" name="password" value="{{ form.password.data or '' }}">
+        </div>
+        <!-- 필드 에러(폼 검증에 실패한 경우) -->
         {% if form.password.errors %}
-        <div class="error">&#10060;{{ form.password.errors.0 }}</div>
+        <div class="error">
+            &#10060;
+            {{ form.password.errors.0 }}
+        </div>
         {% endif %}
+        <!-- flash 에러 -->
+        {% with errors = get_flashed_messages(category_filter=["pw_error"]) %}
+        {% if errors %}
+        <div class="error">
+            &#10060;
+            {{ errors[-1] }}
+        </div>
+        {% endif %}
+        {% endwith %}
 
         <br><input type = "submit" id="sign-in" value = "Sign In" />
 
