@@ -94,8 +94,6 @@ def create_app():
                 # 대여해서 반납하지 않은 경우 -> 대여 불가
                 if book_rental:
                     flash("고객님께서 대여 중인 책입니다.")
-                    # books = Book.query.all()
-                    # return render_template('main.html', books=books)
                     return redirect(url_for('main'))
 
                 # 대여한 적이 없는 경우와 대여한 적 있지만 반납 완료한 경우 -> 대여 가능
