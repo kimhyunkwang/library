@@ -137,9 +137,6 @@ def create_app():
 
             return render_template('main.html', book_list=book_list)
 
-            # books = Book.query.all()
-            # return render_template('main.html', books=books)
-
 
     @app.route('/rental')
     def rental():
