@@ -23,7 +23,7 @@ form #sign-up {
     border-radius: 10px;
     background-color: rgb(237, 248, 87);
 }
-form p {
+form .error {
     font-size: 15px;
     font-weight: bold;
 }

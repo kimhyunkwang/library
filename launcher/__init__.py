@@ -6,6 +6,7 @@ import config
 from werkzeug.security import check_password_hash
 from werkzeug.security import generate_password_hash
 import datetime
+from launcher.forms import LoginForm, RegisterForm
 
 db = SQLAlchemy()
 migrate = Migrate()
@@ -32,58 +33,49 @@ def create_app():
 
     @app.route('/register', methods=('GET', 'POST'))
     def register():
-        if request.method == 'POST':
-            fullname = request.form['fullname']
-            email = request.form['email']
-            password = request.form['password']
-            repeat_password = request.form['repeat-password']
+        form = RegisterForm()
+ 
+        if request.method == 'POST' and form.validate_on_submit():
+
+            fullname = form.fullname
+            email = form.email
+            password = form.password
+            repeat_password = form.repeat_password
+
+            user = User.query.filter(User.email == email.data).first()
             
-            error = None
-
-            if not(fullname and email and password and repeat_password):
-                error = "입력되지 않은 정보가 있습니다."
-            elif password != repeat_password:
-                error = '비밀번호가 일치하지 않습니다.'
+            # 이름은 영어 또는 한국어 검사 추가
+            if user is not None:
+                email.errors.append(f'{email.data}은 이미 등록된 계정입니다.')
+            # 비밀번호 3종류 8자리, 2종류 10자리 검사 추가
+            elif password.data != repeat_password.data:
+                repeat_password.errors.append('비밀번호가 일치하지 않습니다.')
             else:
-                data = User.query.filter(User.email == email).first()
-                if data is not None:
-                    error = f'{email} 은 이미 등록된 계정입니다.'
-
-            if error is None:
-                new_user = User(fullname, email, generate_password_hash(password))
+                new_user = User(fullname = fullname.data, email = email.data, password = generate_password_hash(password.data))
                 db.session.add(new_user)
                 db.session.commit()
                 return redirect(url_for('login'))
-            else:
-                return render_template('register.html', error=error)
-        
-        return render_template('register.html')
+
+        return render_template('register.html', form=form)
 
 
     @app.route('/login', methods=('GET', 'POST'))
     def login():
-        if request.method == 'POST':
-            email = request.form['email']
-            password = request.form['password']
+        form = LoginForm() 
+        
+        if request.method == 'POST' and form.validate_on_submit():  
+            user = User.query.filter(User.email == form.email.data).first()
             
-            error = None
-            
-            data = User.query.filter(User.email == email).first()
-            
-            if data is None:
-                error = '등록되지 않은 계정입니다.'
-            
-            if not (data == None or check_password_hash(data.password, password)):
-                error = '비밀번호가 올바르지 않습니다.'
-
-            if error is None:
+            if user is None:
+                form.email.errors.append('등록되지 않은 계정입니다.')
+            elif not check_password_hash(user.password, form.password.data):
+                form.password.errors.append('비밀번호가 올바르지 않습니다.')
+            else:           
                 session['logged_in'] = True
-                session['user_id'] = data.id
+                session['user_id'] = user.id
                 return redirect(url_for('home'))
-            else:
-                return render_template('login.html', error=error)
 
-        return render_template('login.html')
+        return render_template('login.html', form=form)
 
 
     @app.route('/logout')

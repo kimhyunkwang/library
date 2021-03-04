@@ -8,13 +8,21 @@
 </head>
 <body>
     <form action = "" method="post">
+        {{ form.csrf_token }}
         <h1>로그인</h1>
-        <input type="text" placeholder="Email" id="email" name="email" required><br>
-        <input type="password" placeholder="Password" id="password" name="password" required><br><br>
-        <input type = "submit" id="sign-in" value = "Sign In" />
-        {% if error %}
-        <p>&#10060; {{error}}</p>
+        
+        <div><input type="text" placeholder="Email" id="email" name="email" value="{{ form.email.data or '' }}"></div>
+        {% if form.email.errors %}
+        <div class="error">&#10060;{{ form.email.errors.0 }}</div>
         {% endif %}
+
+        <div><input type="password" placeholder="Password" id="password" name="password" value="{{ form.password.data or '' }}"></div>
+        {% if form.password.errors %}
+        <div class="error">&#10060;{{ form.password.errors.0 }}</div>
+        {% endif %}
+
+        <br><input type = "submit" id="sign-in" value = "Sign In" />
+
     </form>
 </body>
 </html>

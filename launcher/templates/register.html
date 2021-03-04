@@ -8,20 +8,35 @@
 </head>
 <body>
     <form action = "" method="post">
+        {{ form.csrf_token }}
         <h1>회원가입</h1>
-        <input type="text" placeholder="Name" id="fullname" name="fullname" required><br>
-        <input type="text" placeholder="Email" id="email" name="email" required><br>
-        <input type="password" placeholder="Password" id="password" name="password" required><br>
-        <input type="password" placeholder="Repeat Password" id="repeat-password" name="repeat-password" required><br><br>
+        
+        <div><input type="text" placeholder="Name" id="fullname" name="fullname" value="{{ form.fullname.data or '' }}"></div>
+        {% if form.fullname.errors %}
+        <div class="error">&#10060;{{ form.fullname.errors.0 }}</div>
+        {% endif %}
+
+        <div><input type="text" placeholder="Email" id="email" name="email" value="{{ form.email.data or '' }}"></div>
+        {% if form.email.errors %}
+        <div class="error">&#10060;{{ form.email.errors.0 }}</div>
+        {% endif %}
+
+        <div><input type="password" placeholder="Password" id="password" name="password" value="{{ form.password.data or '' }}"></div>
+        {% if form.password.errors %}
+        <div class="error">&#10060;{{ form.password.errors.0 }}</div>
+        {% endif %}
+
+        <div><input type="password" placeholder="Repeat Password" id="repeat_password" name="repeat_password" value="{{ form.repeat_password.data or '' }}"></div>
+        {% if form.repeat_password.errors %}
+        <div class="error">&#10060;{{ form.repeat_password.errors.0 }}</div>
+        {% endif %}
+
+        <br><input type = "submit" id="sign-up" value = "Sign Up" />
+
         <!-- <p>
             패스워드에는 특수문자, 영문, 숫자가 각 1개 이상 포함되어야 합니다.<br/>
             패스워드 길이는 8자 이상이어야 합니다.
         </p> -->
-        
-        <input type = "submit" id="sign-up" value = "Sign Up" />
-        {% if error %}
-        <p>&#10060; {{error}}</p>
-        {% endif %}
     </form>
 </body>
 </html>
