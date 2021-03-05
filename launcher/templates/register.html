@@ -11,9 +11,14 @@
         {{ form.csrf_token }}
         <h1>회원가입</h1>
         
-        <div><input type="text" placeholder="Name" id="fullname" name="fullname" value="{{ form.fullname.data or '' }}"></div>
+        <div>
+            <input type="text" placeholder="Name" id="fullname" name="fullname" value="{{ form.fullname.data or '' }}">
+        </div>
         {% if form.fullname.errors %}
-        <div class="error">&#10060;{{ form.fullname.errors.0 }}</div>
+        <div class="error">
+            &#10060;
+            {{ form.fullname.errors.0 }}
+        </div>
         {% endif %}
 
         <div>
@@ -36,7 +41,9 @@
         {% endif %}
         {% endwith %}
 
-        <div><input type="password" placeholder="Password" id="password" name="password" value="{{ form.password.data or '' }}"></div>
+        <div>
+            <input type="password" placeholder="Password" id="password" name="password" value="{{ form.password.data or '' }}">
+        </div>
         {% if form.password.errors %}
         <div class="error">&#10060;{{ form.password.errors.0 }}</div>
         {% endif %}
@@ -51,15 +58,6 @@
             {{ form.repeat_password.errors.0 }}
         </div>
         {% endif %}
-        <!-- flash 에러 -->
-        {% with errors = get_flashed_messages(category_filter=["pw_error"]) %}
-        {% if errors %}
-        <div class="error">
-            &#10060;
-            {{ errors[-1] }}
-        </div>
-        {% endif %}
-        {% endwith %}
 
         <br><input type = "submit" id="sign-up" value = "Sign Up" />
 

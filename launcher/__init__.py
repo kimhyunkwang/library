@@ -38,14 +38,12 @@ def create_app():
         if request.method == 'POST' and form.validate_on_submit():
             user = User.query.filter(User.email == form.email.data).first()
             
-            # 이름은 영어 또는 한국어 검사 추가
             if user is not None:
                 flash( f"{user.email}은 이미 등록된 계정입니다.", category="email_error" )
-            # 비밀번호 3종류 8자리, 2종류 10자리 검사 추가
-            elif form.password.data != form.repeat_password.data:
-                flash("비밀번호가 일치하지 않습니다.", category="pw_error")
             else:
-                new_user = User(fullname = form.fullname.data, email = form.email.data, password = generate_password_hash(form.password.data))
+                new_user = User(fullname = form.fullname.data, 
+                                email = form.email.data, 
+                                password = generate_password_hash(form.password.data))
                 db.session.add(new_user)
                 db.session.commit()
                 return redirect(url_for('login'))
@@ -89,7 +87,9 @@ def create_app():
 
             # 재고가 있는 경우
             if book.stock > 0:
-                book_rental = BookRental.query.filter(BookRental.book_id == book_id, BookRental.user_id == user_id, BookRental.return_date == None).first()
+                book_rental = BookRental.query.filter(BookRental.book_id == book_id, 
+                                                    BookRental.user_id == user_id, 
+                                                    BookRental.return_date == None).first()
                 
                 # 대여해서 반납하지 않은 경우 -> 대여 불가
                 if book_rental:
@@ -137,7 +137,9 @@ def create_app():
 
             now = datetime.datetime.now()
             nowDate = now.strftime('%Y-%m-%d')
-            book_rental = BookRental.query.filter(BookRental.book_id == book_id, BookRental.user_id == user_id, BookRental.return_date == None).first()
+            book_rental = BookRental.query.filter(BookRental.book_id == book_id, 
+                                                BookRental.user_id == user_id, 
+                                                BookRental.return_date == None).first()
             book_rental.return_date = nowDate
                 
             db.session.commit()
@@ -158,7 +160,11 @@ def create_app():
             user_id = session['user_id']
             create_date = datetime.datetime.now()
 
-            new_comment = Comment(book_id = book_id, user_id = user_id, content = content, rating = rating, create_date = create_date)
+            new_comment = Comment(book_id = book_id, 
+                                user_id = user_id, 
+                                content = content, 
+                                rating = rating, 
+                                create_date = create_date)
             db.session.add(new_comment)
             db.session.commit()
 
