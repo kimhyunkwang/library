@@ -1,4 +1,9 @@
+@charset "UTF-8";
+
 /* Default */
+* {
+    font-family: 'Noto Sans KR Regular', '나눔 고딕', NanumGothic, '돋움', Dotum, sans-serif;
+}
 a {
     text-decoration: none;
     color: #000;
@@ -11,6 +16,7 @@ header {
 header h1 {
     font-size: 36px;
     text-align: center;
+    /* font-family: 'Roboto'; */
 }
 header .header-button {
     text-align: center;
@@ -41,12 +47,16 @@ header .header-button button a:hover {
     row-gap: 40px;
 
     margin: 20px auto;
+    width: 1100px;
 
     text-align: center;
 }
-.container .item p{
+.container .item p {
     font-size: 15px;
     font-weight: bold;
+}
+.container .item .book_name {
+    height: 40px;
 }
 .container .item #rental-bnt,
 .container .item #return-bnt {
@@ -59,6 +69,14 @@ header .header-button button a:hover {
     border: 0;
     border-radius: 10px;
     background-color: rgb(216, 216, 216);
+
+    transition: color 0.3s;
+}
+.container .item #rental-bnt:hover {
+    color: rgb(148, 148, 148);
+}
+.container .item #return-bnt:hover {
+    color: rgb(148, 148, 148);
 }
 .pagination {
     list-style: none;
@@ -74,4 +92,11 @@ header .header-button button a:hover {
 }
 .pagination .active a {
     color:rgb(148, 148, 148)
+}
+
+@media (min-width: 320px) and (max-width: 1000px) {
+    .container {
+        grid-template-columns:repeat(auto-fill, minmax(50%, auto));
+        width: 650px;
+    }
 }

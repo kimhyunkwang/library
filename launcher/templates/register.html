@@ -48,7 +48,10 @@
                     value="{{ form.password.data or '' }}">
         </div>
         {% if form.password.errors %}
-        <div class="error">&#10060;{{ form.password.errors.0 }}</div>
+        <div class="error">
+            &#10060;
+            {{ form.password.errors.0 }}
+        </div>
         {% endif %}
 
         <div>

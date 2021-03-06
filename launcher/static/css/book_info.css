@@ -1,11 +1,31 @@
 /* Main */
 table {
     width: 1000px;
-    padding: 40px;
-    margin: 0 auto 30px auto;
+    padding: 30px;
+    margin: 0 auto;
 }
-table ul {
-    list-style: square;
+table img {
+    height: 300px;
+}
+table td.book_name {
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+table td.details {
+    width : 100px;
+}
+table td.details_desc {
+    margin-left: 0;
+}
+table td.details p,
+table td.details_desc p {
+    margin: 8px 0;
+}
+table h3 {
+    font-size: 21px;
+}
+table p.book_desc {
+    line-height: 160%;
 }
 table #submit {
     width: 200px;
@@ -17,10 +37,28 @@ table #submit {
     border: 0;
     border-radius: 10px;
     background-color: rgb(216, 216, 216);
+
+    transition: color 0.3s;
+}
+table #submit:hover {
+    color: rgb(148, 148, 148);
 }
 table .comment .name {
     font-weight: bold;
 }
 textarea {
     width: 100%;
+}
+
+@media (min-width: 320px) and (max-width: 1000px) {
+    table {
+        width: 650px;
+    }
+    table img {
+        height: 200px;
+    }
+    table td.book_name h2,
+    table td.details p {
+        margin-left: 20px;
+    }
 }

@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-        <h1><a href="../main">Welcome to the Library!</a></h1>
+        <h1><a href="../main">Welcome to the Library&#128213;</a></h1>
         <div class="header-button">
             <button class="rental-list"><a href= "../rental">대여기록</a></button>
             <button class="return"><a href= "../return">반납하기</a></button>
@@ -18,31 +18,42 @@
     </header>
     <table>
         <tr>
-            <td>
+            <td rowspan="2">
                 <div style="text-align : center;">
-                    <img src="{{ book.image_path }}" alt="{{ book.book_name }}" height=300px/>
+                    <img src="{{ book.image_path }}" alt="{{ book.book_name }}"/>
                 </div>
             </td>
-            <td>
-                <ul>
-                    <li>책 이름 : {{ book.book_name }}</li>
-                    <li>출판사 : {{ book.publisher }}</li>
-                    <li>저자 : {{ book.author }}</li>
-                    <li>출간일 : {{ book.publication_date }}</li>
-                    <li>페이지수 : {{ book.pages }}</li>
-                    <li>ISBN 코드 : {{ book.isbn }}</li>
-                </ul>
+            <td colspan="2" class="book_name">
+                <h2>{{ book.book_name }}</h2>
             </td>
         </tr>
         <tr>
-            <td colspan="2"> 
-                <br><h2>책 소개</h2>
-                <p>{{ book.description }}</p>
+            <td class="details">
+                <p>출판사</p>
+                <p>저자</p>
+                <p>출간일</p>
+                <p>페이지수</p>
+                <p>ISBN 코드</p>
+                <p>&#11088;</p>
+            </td>
+            <td class="details_desc">
+                <p>{{ book.publisher }}</p>
+                <p>{{ book.author }}</p>
+                <p>{{ book.publication_date }}</p>
+                <p>{{ book.pages }}</p>
+                <p>{{ book.isbn }}</p>
+                <p>{{ book.rating }}점</p>
             </td>
         </tr>
         <tr>
-            <td colspan="2">
-                <h2>댓글 ({{comments | length}})</h2>
+            <td colspan="3"> 
+                <br><h3>책 소개</h3>
+                <p class="book_desc">{{ book.description }}</p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <h3>댓글 ({{comments | length}})</h3>
                 {% for comment in comments | reverse %}
                     {% if comment %}
                     <div class="comment">

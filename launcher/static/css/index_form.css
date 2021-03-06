@@ -1,4 +1,9 @@
+@charset "UTF-8";
+
 /* Default */
+* {
+    font-family: 'Noto Sans KR Regular', '나눔 고딕', NanumGothic, '돋움', Dotum, sans-serif;
+}
 a {
     text-decoration: none;
     color: #000;
@@ -22,15 +27,22 @@ form #sign-up {
 
     border: 0;
     border-radius: 10px;
-
 }
 form #sign-in {
     background-color: rgb(156, 224, 196);
+    transition: color 0.3s;
+}
+form #sign-in:hover {
+    color: rgb(148, 148, 148);
 }
 form #sign-up {
     background-color: rgb(237, 248, 87);
+    transition: color 0.3s;
+}
+form #sign-up:hover {
+    color: rgb(148, 148, 148);
 }
 form .error {
-    font-size: 15px;
+    font-size: 14px;
     font-weight: bold;
 }

@@ -1,4 +1,9 @@
+@charset "UTF-8";
+
 /* Default */
+* {
+    font-family: 'Noto Sans KR Regular', '나눔 고딕', NanumGothic, '돋움', Dotum, sans-serif;
+}
 a {
     text-decoration: none;
     color: #000;
@@ -31,4 +36,14 @@ header .sign-in {
 }
 header .sign-up {
     background-color: rgb(237, 248, 87);
+}
+header .sign-in a,
+header .sign-up a {
+    transition: color 0.3s;
+}
+header .sign-in a:hover {
+    color: rgb(148, 148, 148);
+}
+header .sign-up a:hover {
+    color: rgb(148, 148, 148);
 }

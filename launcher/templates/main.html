@@ -5,7 +5,7 @@
         {% for book in book_list.items %}
         <div class="item">
             <p><img src="{{ book.image_path }}" alt="{{ book.book_name }}" height=200/></p>
-            <p><a href= "/books/{{ book.id }}" >{{ book.book_name }}</a></p>
+            <p class="book_name"><a href= "/books/{{ book.id }}" >{{ book.book_name }}</a></p>
             <p>&#11088; {{ book.rating }}</p>
             <p>{{ book.stock }}권 남음</p>
 

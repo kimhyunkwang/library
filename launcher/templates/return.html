@@ -6,7 +6,7 @@
             {% if not book_rental.return_date %}
             <div class="item">
                 <p><img src="{{ book_rental.book.image_path }}" alt="{{ book_rental.book.book_name }}" height=200/></p>
-                <p><a href= "/books/{{ book_rental.book_id }}" >{{ book_rental.book.book_name }}</a></p>
+                <p class="book_name"><a href= "/books/{{ book_rental.book_id }}" >{{ book_rental.book.book_name }}</a></p>
                 <p>&#11088; {{ book_rental.book.rating }}</p>
                 <p>{{ book_rental.rental_date }}</p>
 
