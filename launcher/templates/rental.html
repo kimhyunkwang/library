@@ -1,21 +1,6 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <title>도서관 대출 서비스</title>
+{% extends 'base.html' %}
 
-    <link rel="stylesheet" href="../static/css/main.css">
-</head>
-<body>
-    <header>
-        <h1><a href="/main">Welcome to the Library!</a></h1>
-        <div class="header-button">
-            <button class="rental-list"><a href= "rental">대여기록</a></button>
-            <button class="return"><a href= "return">반납하기</a></button>
-            <button class="sign-out"><a href= "logout">Sign Out</a></button>
-        </div>
-    </header>
-    
+{% block content %} 
     <div class="container">
         {% for book_rental in book_rentals %}
             <div class="item">
@@ -32,5 +17,4 @@
             </div>
         {% endfor %}
     </div>
-</body>
-</html>
+{% endblock %}

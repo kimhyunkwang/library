@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>도서관 대출 서비스</title>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <script>
+        alert("{{ messages[-1] }}");
+    </script>
+    {% endif %}
+    {% endwith %}
+
+    <link rel="stylesheet" href="../static/css/base.css">
+    <link rel="stylesheet" href="../static/css/book_info.css">
+</head>
+<body>
+    <header>
+        <h1><a href="/main">Welcome to the Library!</a></h1>
+        <div class="header-button">
+            <button class="rental-list"><a href= "rental">대여기록</a></button>
+            <button class="return"><a href= "return">반납하기</a></button>
+            <button class="sign-out"><a href= "logout">Sign Out</a></button>
+        </div>
+    </header>
+
+    {% block content %}
+    {% endblock %}
+
+</body>
+</html>
+

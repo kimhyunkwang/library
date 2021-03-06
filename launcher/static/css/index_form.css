@@ -12,6 +12,7 @@ form {
 form h1 {
     font-size: 36px;
 }
+form #sign-in,
 form #sign-up {
     width: 180px;
     height: 35px;
@@ -21,6 +22,12 @@ form #sign-up {
 
     border: 0;
     border-radius: 10px;
+
+}
+form #sign-in {
+    background-color: rgb(156, 224, 196);
+}
+form #sign-up {
     background-color: rgb(237, 248, 87);
 }
 form .error {
