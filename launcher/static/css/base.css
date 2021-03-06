@@ -1,8 +1,9 @@
 @charset "UTF-8";
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 
 /* Default */
 * {
-    font-family: 'Noto Sans KR Regular', '나눔 고딕', NanumGothic, '돋움', Dotum, sans-serif;
+    font-family: 'Noto Sans KR', '나눔 고딕', NanumGothic, '돋움', Dotum, sans-serif;
 }
 a {
     text-decoration: none;
