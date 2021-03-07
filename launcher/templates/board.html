@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <main>
+
+        <h3>
+            내가 원하는 책이 없다면?
+            <input type="button" id="tog_button" value="Click!&#10024;" onclick="div_show();"/>
+        </h3>
+
+        <div id="tog_div">
+            <form action = "" method="post" class="a_form">
+                <div><input type="text" placeholder="책 이름" id="book_name" name="book_name" required></div>
+                <div><input type="text" placeholder="저자" id="author" name="author" required></div><br>
+                <div><input type="submit" id="submit" value="제출하기" onClick="div_show();" /></div>
+                <div><input type="button" id="tog_button" value="Close" onclick="div_hide();"/></div>
+            </form>
+        </div>
+
+        <div class="a_container">
+            <table>
+                <tr>
+                    <th>번호</th>
+                    <th>작성자</th>
+                    <th>책 이름</th>
+                    <th>저자</th>
+                    <th>작성일</th>
+                    <th>입고</th>
+                </tr>
+                {% for article in articles | reverse %}
+                {% if article %}
+                <tr class="article">
+                    <td>{{ loop.revindex }}</td>
+                    <td>{{ article.user.fullname }}</td>
+                    <td>{{ article.book_name }}</td>
+                    <td>{{ article.author }}</td>
+                    <td>{{ article.create_date.strftime('%Y-%m-%d') }}</td>
+                    <td><input type="checkbox" name="checkbox"></td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </table>
+        </div>
+
+    </main>
+{% endblock %}

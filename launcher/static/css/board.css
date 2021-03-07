@@ -1,0 +1,57 @@
+/* Main */
+h3 {
+    font-size: 21px;
+    text-align: center;
+
+    margin-top: 50px;
+}
+.a_form{
+    margin: 20px auto;
+    width: 1000px;
+
+    text-align: center;
+}
+table {
+    width: 1000px;
+    padding: 30px;
+    margin: 0 auto;
+
+    text-align: center;
+}
+#tog_div {
+    display: none;
+}
+form #submit{
+    width: 200px;
+    height: 35px;
+
+    font-size: 17px;
+    font-weight: bold;
+    text-align: center;
+
+    border: 0;
+    border-radius: 10px;
+    background-color: rgb(216, 216, 216);
+    
+    transition: color 0.3s;
+}
+form #submit:hover {
+    color: rgb(148, 148, 148);
+}
+#tog_button {
+    border: 0;
+    background-color: rgb(255, 255, 255);
+}
+#tog_button:hover {
+    color: rgb(148, 148, 148);
+}
+
+
+@media (min-width: 320px) and (max-width: 1000px) {
+    .a_form{
+        width: 650px;
+    }
+    table {
+        width: 650px;
+    }
+} 

@@ -60,7 +60,8 @@ header .header-button button a:hover {
     height: 40px;
 }
 .container .item #rental-bnt,
-.container .item #return-bnt {
+.container .item #return-bnt,
+.container .item #submit {
     width: 200px;
     height: 35px;
 

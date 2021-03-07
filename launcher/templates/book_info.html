@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <title>도서관 대출 서비스</title>
 
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <script>
+        alert("{{ messages[-1] }}");
+    </script>
+    {% endif %}
+    {% endwith %}
+
     <link rel="stylesheet" href="../static/css/base.css">
     <link rel="stylesheet" href="../static/css/book_info.css">
 </head>
@@ -13,7 +21,8 @@
         <div class="header-button">
             <button class="rental-list"><a href= "../rental">대여기록</a></button>
             <button class="return"><a href= "../return">반납하기</a></button>
-            <button class="sign-out"><a href= "../logout">Sign Out</a></button>
+            <button class="board"><a href= "../board">입고 게시판</a></button>
+            <button class="sign-out"><a href= "../logout">로그아웃</a></button>
         </div>
     </header>
     <table>
@@ -24,7 +33,7 @@
                 </div>
             </td>
             <td colspan="2" class="book_name">
-                <h2>{{ book.book_name }}</h2>
+                <h3>{{ book.book_name }}</h3>
             </td>
         </tr>
         <tr>

@@ -12,15 +12,27 @@
     {% endif %}
     {% endwith %}
 
+    <script type="text/javascript">
+        function div_show() {
+            document.getElementById("tog_div").style.display = "block";
+        }
+        function div_hide() {
+            document.getElementById("tog_div").style.display = "none";
+        }
+    </script>
+
     <link rel="stylesheet" href="../static/css/base.css">
     <link rel="stylesheet" href="../static/css/book_info.css">
+    <link rel="stylesheet" href="../static/css/board.css">
 </head>
 <body>
     <header>
         <h1><a href="/main">Welcome to the Library&#128213;</a></h1>
         <div class="header-button">
+            
             <button class="rental-list"><a href= "rental">대여기록</a></button>
             <button class="return"><a href= "return">반납하기</a></button>
+            <button class="board"><a href= "board">입고 게시판</a></button>
             <button class="sign-out"><a href= "logout">로그아웃</a></button>
         </div>
     </header>

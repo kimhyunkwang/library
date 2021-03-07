@@ -10,7 +10,6 @@
     <form action = "" method="post">
         {{ form.csrf_token }}
         <h1>로그인</h1>
-        
         <div>
             <input type="text" placeholder="Email" id="email" name="email" 
                     value="{{ form.email.data or '' }}">

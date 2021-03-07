@@ -38,3 +38,12 @@ class Comment(db.Model):
     content = db.Column(db.Text(), nullable=False)
     create_date = db.Column(db.DateTime(), nullable=False)
     rating = db.Column(db.Integer, nullable=False)
+
+class Article(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'), nullable=False)
+    user = db.relationship('User')
+    author = db.Column(db.String(64), nullable=False)
+    book_name = db.Column(db.String(100), nullable=False)
+    create_date = db.Column(db.DateTime(), nullable=False)
+    check = db.Column(db.Boolean(), nullable=False)
