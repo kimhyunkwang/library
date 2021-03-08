@@ -43,7 +43,12 @@
                 <p>출간일</p>
                 <p>페이지수</p>
                 <p>ISBN 코드</p>
-                <p>&#11088;</p>
+                <p class="star_i">
+                    &#11088;
+                    {% for _ in range(book.rating - 1) %}
+                    &#11088;
+                    {% endfor%}
+                </p>
             </td>
             <td class="details_desc">
                 <p>{{ book.publisher }}</p>
@@ -66,20 +71,38 @@
                 {% for comment in comments | reverse %}
                     {% if comment %}
                     <div class="comment">
-                        <p class="name">{{ comment.user.fullname }}</p>
-                        <p>&#11088; {{ comment.rating }} {{ comment.content }}</p>
+                        <p class="name">
+                            {{ comment.user.fullname }}
+                            <span class="star_i">
+                                {% for _ in range(comment.rating) %}
+                                &#11088;
+                                {% endfor%}
+                            </span>
+                        </p>
+
+                        <p class="content">{{ comment.content }}</p>
                     </div> 
                     {% endif %}
                 {% endfor %}
                 <form action = "" method="post">
                     <br>
-                    &#11088; <input type="number" id="rating" name="rating" min="1" max="5" required>
+                    &#11088;
+                    <input type="number" id="rating" name="rating" min="1" max="5" required>
                     <p><textarea rows="3" cols="150" name="content" required></textarea></p>
-                    
                     <input type = "submit" id="submit" value = "작성하기" />
                 </form>
             </td>
         </tr>
     </table>
+
+    <footer id="footer">
+        <div class="copyright">
+            <p>Copyright © 2021 kimhyunkwang. All rights reserved.</p>
+        </div>
+        <div class="address">
+            <p>&#9993; khkhy8712@gmail.com</p>
+        </div>
+    </footer>
+    
 </body>
 </html>

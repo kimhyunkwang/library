@@ -6,7 +6,11 @@
             <div class="item">
                 <p><img src="{{ book_rental.book.image_path }}" alt="{{ book_rental.book.book_name }}" height=200/></p>
                 <p class="book_name"><a href= "/books/{{ book_rental.book_id }}" >{{ book_rental.book.book_name }}</a></p>
-                <p>&#11088; {{ book_rental.book.rating }}</p>
+                <p class="star">
+                    {% for _ in range(book_rental.book.rating) %}
+                        &#11088;
+                    {% endfor%}
+                </p>
                 <p>
                     {{ book_rental.rental_date }} ~ 
 
