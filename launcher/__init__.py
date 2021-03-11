@@ -23,7 +23,3 @@ def create_app():
     app.register_blueprint(board_views.bp)
 
     return app
-
-if __name__ == '__main__':
-    db.create_all()
-    app.run('localhost', port=5000, debug=True)
