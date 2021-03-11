@@ -9,10 +9,7 @@ migrate = Migrate()
 
 def create_app():
     app = Flask(__name__)
-
-    app.config['SQLALCHEMY_DATABASE_URI'] = ("mysql+pymysql://root:1234@localhost:3306/library?charset=utf8")
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.secret_key = 'dev'
+    app.config.from_object(config)
 
     # ORM
     db.init_app(app)

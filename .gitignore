@@ -2,3 +2,4 @@ python-env/
 __pycache__/
 bash.exe.stackdump
 migrations/
+config.py
