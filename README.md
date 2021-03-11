@@ -14,27 +14,27 @@
 ## Directory 구조
 ```
 library
-+-- data
-|   +--books.csv
-+-- launcher
-|   +-- static : css, image
-|   +-- templates : html files
-|   +-- views
-|       +-- auth_views.py : 회원가입, 로그인, 로그아웃
-|       +-- board_views.py : 게시판
-|       +-- book_views.py : 책 상세
-|       +-- main_views.py : 메인, 대여, 반납
-|   +-- __init__.py
-|   +-- forms.py : 회원가입, 로그인 form 정의
-|   +-- models.py : User, Book, BookRental, Comment, Article Model 정의
-+-- migrations
-+-- python-env
-+-- .gitignore
-+-- config.py
-+-- load_data.py
-+-- README.md
-+-- requirements.txt
-+-- run.py
+├─ data
+|   └─ books.csv
+├─ launcher
+|   ├─ static : css, image
+|   ├─ templates : html files
+|   ├─ views
+|   |   ├─ auth_views.py : 회원가입, 로그인, 로그아웃
+|   |   ├─ board_views.py : 게시판
+|   |   ├─ book_views.py : 책 상세
+|   |   └─ main_views.py : 메인, 대여, 반납
+|   ├─ __init__.py
+|   ├─ forms.py : 회원가입, 로그인 form 정의
+|   └─ models.py : User, Book, BookRental, Comment, Article Model 정의
+├─ migrations
+├─ python-env
+├─ .gitignore
+├─ config.py
+├─ load_data.py
+├─ README.md
+├─ requirements.txt
+└─ run.py
 ```
 
 ## Reference
