@@ -20,6 +20,15 @@ class Book(db.Model):
     rating = db.Column(db.Integer, nullable=False)
     image_path = db.Column(db.String(128), nullable=False)
 
+    def has_stock(self):
+        return self.stock > 0
+    
+    def add_stock(self):
+        self.stock += 1
+    
+    def reduce_stock(self):
+        self.stock -= 1
+
 class BookRental(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     book_id = db.Column(db.Integer, db.ForeignKey('book.id'), nullable=False)
