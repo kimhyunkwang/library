@@ -8,7 +8,8 @@
 - [Reference](#reference)
 
 ## 프로젝트 소개
-도서 대여, 반납 등의 도서관 기본 기능을 제공하는 반응형 웹 서비스입니다.
+도서 대여, 반납 등의 도서관 기본 기능을 제공하는 반응형 웹 서비스입니다.    
+[여기](http://elice-kdt-ai-track-vm-racer-18.koreacentral.cloudapp.azure.com/)에서 자세히 살펴보실 수 있습니다.
 
 ## 주요 사용 기술
 - Flask
