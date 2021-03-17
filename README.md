@@ -3,7 +3,8 @@
 ## 목차
 - [프로젝트 소개](#프로젝트-소개)
 - [주요 사용 기술](#주요-사용-기술)
-- [Directory 구조](#directory-구조)
+- [프로젝트 설치 및 실행 방법](#프로젝트-설치-및-실행-방법)
+- [디렉토리 구조](#디렉토리-구조)
 - [기능 소개](#기능-소개)
 - [Reference](#reference)
 
@@ -17,9 +18,55 @@
 - PyMySQL
 - MySQL
 - HTML + Flask Jinja2 + CSS
-- Azure
+- Azure VM (OS: ubuntu LTS 18.04)
 
-## Directory 구조
+## 프로젝트 설치 및 실행 방법
+### 설치
+```bash
+# clone the project repository
+git clone https://kdt-gitlab.elice.io/001_part2_project-library/team1/library.git
+# 프로젝트 디렉토리로 이동
+cd library
+```
+
+### 가상 환경 구축
+```bash
+# 가상 환경 폴더 생성
+python -m venv python-env
+# 가상 환경 접속
+source python-env/bin/activate
+# 패키지 설치
+pip install -r requirements.txt
+```
+
+### 데이터베이스 설정
+```bash
+# library/config.py 생성하고 아래 내용 작성
+# 실제 정보를 <>, []에 기입해주세요.
+
+SQLALCHEMY_DATABASE_URI = "mysql+pymysql://<username>:<password>@<hostname>:3306/<database_name>?charset=utf8mb4"
+SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+SECRET_KEY = [secret_key]
+```
+
+### 마이그레이션 및 데이터 초기화
+```bash
+# migrations directory 생성
+flask db init
+flask db migrate
+flask db upgrade
+
+# 초기 데이터 로드
+python load_data.py
+```
+
+### 실행
+```bash
+python run.py
+```
+
+## 디렉토리 구조
 ```
 library                 # root
 ├─ data
